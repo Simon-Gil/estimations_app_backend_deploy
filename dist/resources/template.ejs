@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  h1 {
+    color: #333;
+    text-align: center;
+    font-size: 4.5rem;
+    padding-top: 0px;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Definir contenedor de los logos */
+  .headLogos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Definir contenedor de datos de oportunidad */
+  .opportunity-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  /* Contenedor de texto largo */
+  .large-text-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 0;
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+
+  .text-title {
+    margin-left: <%=sideMargin%>;
+    margin-top: 4rem;
+  }
+
+  /* Estilos de páginas */
+  .pagina {
+    page-break-after: auto;
+    width: 210mm;
+    height: 297mm;
+  }
+
+  .pagina-1 {
+    background-image: url(<%= backgroundReducedSrc %>);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0em 0em;
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    z-index: -1;
+  }
+
+  .pagina-2 {
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    z-index: -1;
+  }
+
+  .pagina-4 {
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    z-index: -1;
+  }
+
+
+  .pagina-6 {
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    z-index: -1;
+  }
+
+  /* Estilo para servicios container pag 2 */
+  .servicios-container {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    margin-left: <%=sideMargin %>;
+    margin-right: <%=sideMargin %>;
+    margin-top: 0px;
+  }
+
+  .uxui-container {
+    padding-left: 2rem;
+  }
+
+  /* Estilo para las variables en rosa */
+  .pink {
+    color: #E01683;
+  }
+
+  /* Estilo centrar imagen */
+  .centered-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* Fija el contenedor dentro de su contenedor principal */
+    top: 7rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Evita que se desborde */
+  }
+
+  /* Estilo front image */
+  .front-img {
+    width: auto;
+    /* Aumenta el tamaño de la imagen más allá del 100% */
+    height: 35em;
+    /* Mantiene la proporción original de la imagen */
+    object-fit: contain;
+    /* Asegura que la imagen no se distorsione */
+  }
+
+  /* Estilo team image */
+  .team-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* Fija el contenedor dentro de su contenedor principal */
+    top: 18rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Evita que se desborde */
+  }
+
+  .team-img {
+    width: 36em;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .third-page-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .relations-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .relations-image {}
+
+  .meeting-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .meeting-img {
+    width: 30em;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Estilo CEO container */
+  .ceo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left: auto;
+
+    margin-right: <%=sideMargin %>;
+    margin-top: 2em;
+  }
+
+  .ceo-text-container {
+    text-align: right;
+  }
+
+
+
+  /* Estilo footer */
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 0px;
+    /* Asegura que no haya espacio adicional debajo del pie */
+    display: flex;
+    /* Activa el modelo de Flexbox */
+    justify-content: space-between;
+    /* Distribuye los tres elementos equitativamente */
+    align-items: center;
+    /* Centra verticalmente los elementos dentro del footer */
+  }
+
+  .footer-text {
+    color: #FFFFFF;
+    padding: 3em;
+    font-size: .7rem;
+  }
+
+  /* Estilo para la TABLA */
+
+  .table-container {
+    margin-left: <%=sideMargin %>;
+
+    margin-right: <%=sideMargin %>;
+    margin-top: 3.5rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+    font-size: 14px;
+    color: #333;
+  }
+
+  th {
+    text-align: left;
+    font-weight: normal;
+    padding-bottom: 10px;
+    font-size: 18px;
+  }
+
+  td {
+    padding: 8px;
+    vertical-align: top;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+  .main-amount {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .note {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .highlight {
+    font-weight: bold;
+  }
+
+  /* Estilo para las filas */
+  .concept-title {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 0;
+    color: #333;
+  }
+
+  .row-separator {
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+  }
+</style>
+
+<body>
+  <div class="pagina pagina-1">
+    <div class="headLogos">
+      <img src="<%= softUxperiencieSrc %>" alt="The software uxperiencie">
+      <img src="<%= duacodeLogoSrc %>" alt="Logo">
+    </div>
+
+    <div class="opportunity-data-container">
+      <div>
+        <h1>propuesta<span class="pink">.</span></h1>
+        <p>
+          PROYECTO A MEDIDA PARA <span class="pink"><%= accountName %></span><br>
+          <span class="pink"><%= opportunityName%></span><br><%= offerDate %>
+        </p>
+      </div>
+    </div>
+
+    <div class="centered-image-container">
+      <img class="front-img" src="<%= firstPageImageSrc %>">
+    </div>
+
+    <div class="footer">
+      <p class="footer-text">
+        <span style="font-weight: bold">A CORUÑA - Hi Coruña</span><br>
+        Av. Porto da Coruña 3, Planta Baja, Local 3,<br>
+        15003 - A Coruña
+      </p>
+      <p class="footer-text">
+        <span style="font-weight: bold">Valencia</span><br>
+        Av. de Catalunya 9, Entlo,<br>
+        Benimaclet, 46020 - Valencia
+      </p>
+      <p class="footer-text">
+        DUACODE S.L. - B70441225<br>
+        <span style="font-weight: bold">www.duacode.com</span><br>
+        <span style="font-weight: bold">contacto@duacode.com</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="pagina pagina-2">
+    <div class="headLogos">
+      <img src="<%= softUxperiencieSrc %>" alt="The software uxperiencie">
+      <img src="<%= duacodeLogoSrc %>" alt="Logo">
+    </div>
+
+    <h2 class="text-title">te invitamos a formar parte <br>de nuestra gran familia<span class="pink">.<span></h2>
+    <div class="large-text-container">
+      <p>
+        ¡Hola!<br><br>Queremos agradecerte el interés que has mostrado para trabajar con nuestro equipo con una <span style="font-weight:bold">propuesta detallada y estudiada</span>, que recoge la mejor solución para tu
+        proyecto. Tu negocio es importante para nosotros y por eso cuidamos con mimo cada detalle para que el resultado
+        esté a la altura de lo que necesitas.<br><br>Este documento ha sido redactado por un <span style="font-weight:bold">equipo</span> de profesionales cuya misión es desarrollar productos y servicios de
+        <span style="font-weight:bold">calidad</span>, que mejoren los procesos y la imagen de la
+        empresa.<br><br>Contamos con una familia de clientes por todo el mundo, que un día depositaron su confianza en
+        nosotros y que continúan haciéndolo tras más de <span style="font-weight:bold">300 proyectos</span>. Nos
+        encantaría que dieras ese paso y nos elijas para que podamos trabajar <span style="font-weight:bold">juntos</span>. Te demostraremos hasta dónde podemos llegar.
+        <br><br>Somos the software UXperience.
+      </p>
+    </div>
+    <div class="team-img-container">
+      <img class="team-img" src="<%= teamImageSrc %>">
+    </div>
+  </div>
+
+  <div class="pagina pagina-3">
+    <div class="headLogos">
+      <img src="<%= softUxperiencieSrc %>" alt="The software uxperiencie">
+      <img src="<%= duacodeLogoSrc %>" alt="Logo">
+    </div>
+    <h2 class="text-title" style="margin-bottom:0px">programar y diseñar,<br>eso es lo que hacemos<span class="pink">.</span></h2>
+    <div class="large-text-container">
+      <p>
+        No somos una agencia de marketing, no hacemos campañas SEM ni trabajamos con plantillas predefinidas. Mezclamos
+        el <span style="font-weight:bold">código<span> más fiable con la <span style="font-weight:bold">experiencia de
+              usuario</span> de mayor calidad para cubrir las necesidades de nuestros clientes.
+      </p>
+    </div>
+
+    <div class="servicios-container">
+      <div class="desarrollo-container">
+        <h2 style="margin-bottom: 0px">desarrollo<span class="pink">.</span></h2>
+        <p>app móvil<br>aplicaciones web<br>pwa<br>webs a medida<br>eCommerce<br>integraciones<br>consultoría funcional
+        </p>
+      </div>
+      <div class="uxui-container">
+        <h2 style="margin-bottom: 0px">uxui<span class="pink">.</span></h2>
+        <p>auditoría UX<br>research UX<br>interfaces UI<br>branding UX<br>user testing</p>
+      </div>
+    </div>
+    <div class="large-text-container">
+      <p>Desarrollamos <span style="font-weight:bold">aplicaciones móviles</span> y <span style="font-weight:bold">aplicaciones web</span> para que tu empresa ahorre tiempo y dinero o para que
+        conviertas tu idea de negocio en realidad. Creamos <span style="font-weight:bold">sitios web</span> con diseños
+        atractivos que te diferencien de la competencia.</p>
+    </div>
+
+    <div class="third-page-img-container">
+      <img class="third-page-img" src="<%= thirdPageImageSrc %>">
+    </div>
+    <div class="large-text-container">
+      <p>Diseñamos <span style="font-weight:bold">productos digitales</span> con el enfoque principal de ofrecer una
+        buena <span style="font-weight:bold">experiencia de usuario</span>, asegurando que cada interacción sea
+        intuitiva. El <span style="font-weight:bold">research ux</span> nos permite aportar formas de agregar valor a
+        los productos desde el punto de vista de negocio, integrando estratégicamente características que no solo
+        mejoren la experiencia del usuario, sino que también impulsen el éxito del producto.<br><br><span style="font-weight:bold">Programamos</span> y <span style="font-weight:bold">diseñamos</span> lo que se te
+        pueda ocurrir y más. Todo aderezado con atención, mucho cariño y detalle.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="pagina pagina-4">
+    <div class="headLogos">
+      <img src="<%= softUxperiencieSrc %>" alt="The software uxperiencie">
+      <img src="<%= duacodeLogoSrc %>" alt="Logo">
+    </div>
+    <h2 class="text-title" style="margin-bottom:0px">ejecutamos proyectos,<br>cultivamos relaciones<span class="pink">.</span></h2>
+    <div class="large-text-container">
+      <p>
+        Trabajamos con una <span style="font-weight:bold">gran variedad de clientes y sectores</span>, desde clubs
+        deportivos a fabricantes de impresoras 3D, pasando por negocios locales, multinacionales o entidades públicas.
+        Algunos son empresas consolidadas, otros autónomos o particulares que quieren mejorar sus procesos, y también
+        startups que buscan implementar su modelo de negocio en internet.
+        <br>Gracias a ellos nos superamos diariamente y mantenemos intacto nuestro objetivo: ayudarles a <span style="font-weight:bold">crecer a través del software y el diseño</span>, con proyectos eficientes,
+        innovadores y atractivos.
+        <br>Buscamos relaciones duraderas con nuestros clientes porque somos unos auténticos románticos. Los que ves a
+        continuación, son algunos de los compañeros de viaje con los que trabajamos de forma habitual.
+        <br><span style="font-weight:bold">¡Ya somos más de 200!</span>
+      </p>
+    </div>
+    <div class="relations-image-container">
+      <img src="<%= relationsImageSrc %>">
+    </div>
+  </div>
+
+  <div class="pagina pagina-5">
+    <div class="headLogos">
+      <img src="<%= softUxperiencieSrc %>" alt="The software uxperiencie">
+      <img src="<%= duacodeLogoSrc %>" alt="Logo">
+    </div>
+    <div style="margin-left: <%= sideMargin %>">
+      <h2 class="text-title" style="margin-bottom:0px; margin-left:0px">un proyecto a medida,<br>pensado para ti<span class="pink">.</span></h2>
+      <p>Ahora que ya nos conoces, queremos presentarte<br>el qué, cómo y cuánto de esta propuesta.</p>
+    </div>
+
+    </h2>
+    <div>
+      <h2 class="text-title"><%= techProposal %></h2>
+      <h3 style="margin-left:<%= sideMargin %>; margin-bottom: 0px; margin-top: 0px;">qué haremos<span class="pink">.</span></h3>
+      <div class="large-text-container">
+        <p class=""><%= goalsAndContext %></p>
+      </div>
+      <div class="large-text-container" style="display:flex; flex-direction:column">
+          <p style="font-size: 0.9rem; margin-bottom:2px; color:gray">
+            *Cualquier funcionalidad o metodología no incluida explícitamente en este documento
+            deberá ser analizada y presupuestada.
+          </p>
+          <p style="font-size: 0.9rem; color: gray;margin-top:2px;">
+            *Cualquier ampliación sobre el alcance, las funcionalidades o las metodologías detalladas
+            en este documento, deberá ser analizada y presupuestada.
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagina pagina-6">
+    <div class="headLogos">
+      <img src="<%= softUxperiencieSrc %>" alt="The software uxperiencie">
+      <img src="<%= duacodeLogoSrc %>" alt="Logo">
+    </div>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Concepto</th>
+          <th>Importe</th>
+        </tr>
+
+        <!-- Desarrollo del Proyecto -->
+        <tr class="row-separator">
+          <td class="concept-title" colspan="2">desarrollo del proyecto.</td>
+        </tr>
+        <tr>
+          <td>
+            desarrollo de aplicación web a medida según especificaciones
+            <br><span class="note">*impuestos no incluidos</span>
+          </td>
+          <td class="main-amount"><%= totalPrice %> €*</td>
+        </tr>
+
+        <!-- Infraestructura -->
+        <tr class="row-separator">
+          <td class="concept-title" colspan="2">infraestructura.</td>
+        </tr>
+        <tr>
+          <td>subdominio anual para acceder a la herramienta + SSL</td>
+          <td class="highlight">asumido por cliente</td>
+        </tr>
+        <tr>
+          <td>servidor/hosting anual</td>
+          <td class="highlight">asumido por cliente</td>
+        </tr>
+        <tr>
+          <td>mantenimiento anual de la aplicación</td>
+          <td class="highlight">por definir</td>
+        </tr>
+      </table>
+
+      <p class="note">* todas las cantidades sin impuestos</p>
+
+      <table>
+        <tr class="row-separator">
+          <td class="concept-title" colspan="2">método de pago y condiciones.</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            mediante transferencia bancaria
+            <br>50% por adelantado
+            <br>50% al finalizar
+          </td>
+        </tr>
+
+        <tr class="row-separator">
+          <td class="concept-title" colspan="2">duración estimada del proyecto.</td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= estimatedMonths%> meses</td>
+        </tr>
+
+        <tr class="row-separator">
+          <td class="concept-title" colspan="2">validez de la propuesta.</td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= daysToExp %> días</td>
+        </tr>
+
+        <tr class="row-separator">
+          <td class="concept-title" colspan="2">otras consideraciones.</td>
+        </tr>
+        <tr>
+          <td colspan="2">-</td>
+        </tr>
+      </table>
+
+
+    </div>
+
+  </div>
+
+  </div>
+
+  <div class="pagina pagina-7">
+    <div class="headLogos">
+      <img src="<%= softUxperiencieSrc %>" alt="The software uxperiencie">
+      <img src="<%= duacodeLogoSrc %>" alt="Logo">
+    </div>
+    <div class="meeting-img-container"> <img class="meeting-img" src="<%= meetingImageSrc %>"> </div>
+    <h2 class="text-title" style="margin-bottom:0px;">un gran proyecto está a punto de comenzar<span class="pink">.</span></h2>
+    <div class="large-text-container">
+      <p><span style="font-weight:bold">Gracias</span> por el tiempo que has dedicado a analizar esta propuesta llena de
+        atención, cariño y detalle, los ingredientes principales que mezclamos en todos nuestros trabajos.
+        <br><br>Hemos intentado explicar, de la forma más clara posible, el servicio profesional que estamos planteando
+        para tu proyecto. Si tienes cualquier duda al respecto, puedes contactar conmigo enviándome un email a <span style="font-weight:bold">alvaro.enriquez@duacode.com</span> o llamarme al <span style="font-weight:bold">652
+          048 298</span>.
+        <br><br>Ojalá este documento sea el comienzo de un largo camino juntos, en donde la confianza y el esfuerzo nos
+        ayuden a materializar, con éxito, todos los proyectos que nos propongamos.
+        <br><br>Solo queda un último paso, que decidas elegirnos como tus compañeros de viaje. <span style="font-weight:bold">¿Empezamos?</span>
+      </p>
+    </div>
+
+
+    <div class="ceo-container">
+      <div class="ceo-text-container">
+        <p>Atentamente,<br><span style="font-weight:bold">álvaro enríquez.</span><br>CEO/CCO.</p>
+      </div>
+      <div class="ceo-img-container"> <img class="ceo-img" src="<%= ceoImageSrc %>"> </div>
+    </div>
+
+
+  </div>
+</body>
+
+</html>
